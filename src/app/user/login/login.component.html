@@ -1,5 +1,6 @@
       <!-- Login Form -->
       <form #loginForm="ngForm" (ngSubmit)="login()">
+        <app-alert [color]="alertColor" *ngIf="showAlert">{{alertMsg}}</app-alert>
         <!-- Email -->
         <div class="mb-3">
           <label class="inline-block mb-2">Email</label>
