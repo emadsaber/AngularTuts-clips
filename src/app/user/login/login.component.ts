@@ -38,6 +38,6 @@ export class LoginComponent implements OnInit {
       this.showAlert = true;
     }
 
-    console.log(this.credentials);
+    console.log(this.credentials); 
   }
 }

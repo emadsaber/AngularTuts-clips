@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { EmailTaken } from '../validators/email-taken';
+import { RegisterValidators } from '../validators/register-validators';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  constructor(private auth: AuthService){}
+  constructor(private auth: AuthService, private emailTaken: EmailTaken){}
 
   name = new FormControl('', [
     Validators.required,
@@ -18,7 +20,7 @@ export class RegisterComponent {
   email = new FormControl('', [
     Validators.required,
     Validators.email
-  ]);
+  ], [this.emailTaken.validate]);
   age = new FormControl('', [
     Validators.min(15),
     Validators.max(70)
@@ -42,9 +44,9 @@ export class RegisterComponent {
     email: this.email,
     age: this.age,
     password: this.password,
-    confirm_password: this.password,
+    confirm_password: this.confirm_password,
     phoneNumber: this.phoneNumber
-  })
+  }, [RegisterValidators.passwordMatch('password', 'confirm_password')])
 
   alertColor = 'blue';
   alertMessage = 'Account Created!';
