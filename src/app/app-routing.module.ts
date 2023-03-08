@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
+import { ClipComponent } from './clip/clip.component';
 
 const routes: Routes = [
   {
@@ -8,8 +10,16 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
+    path: 'about',
+    component: AboutComponent,
+  },
+  {
     path: 'video',
     loadChildren: () => import('./video/video.module').then(m => m.VideoModule)
+  },
+  {
+    path: 'clip/:id',
+    component: ClipComponent,
   }
 ];
 
